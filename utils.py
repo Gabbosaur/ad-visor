@@ -303,8 +303,10 @@ def visualizza_risultati_benchmark(risultati):
                 st.success(f"✅ {verdetto_tuo}")
             elif verdetto_tuo == "CONSIGLIATO_CON_RISERVA":
                 st.warning(f"⚠️ {verdetto_tuo}")
-            else:
+            elif verdetto_tuo == "NON_CONSIGLIATO":
                 st.error(f"❌ {verdetto_tuo}")
+            else:
+                st.info(f"ℹ️ {verdetto_tuo}")
             st.write(tuo_video.get("motivazione_verdetto", "N/A"))
             
         with col2:
@@ -315,8 +317,10 @@ def visualizza_risultati_benchmark(risultati):
                 st.success(f"✅ {verdetto_comp}")
             elif verdetto_comp == "CONSIGLIATO_CON_RISERVA":
                 st.warning(f"⚠️ {verdetto_comp}")
-            else:
+            elif verdetto_comp == "NON_CONSIGLIATO":
                 st.error(f"❌ {verdetto_comp}")
+            else:
+                st.info(f"ℹ️ {verdetto_comp}")
             st.write(comp_video.get("motivazione_verdetto", "N/A"))
         
         # Analisi SWOT strutturata
@@ -367,6 +371,37 @@ def visualizza_risultati_benchmark(risultati):
         # Raccomandazione finale
         st.header("💡 Raccomandazione Strategica")
         st.info(comparativa.get('raccomandazione_strategica', 'N/A'))
+        
+        # Controlli personalizzati
+        controlli_pers = data.get("controlli_personalizzati", [])
+        if controlli_pers:
+            st.header("🔍 Controlli Personalizzati")
+            for controllo in controlli_pers:
+                if isinstance(controllo, dict):
+                    st.markdown(f"**{controllo.get('controllo', 'N/A')}**")
+                    col_ctrl1, col_ctrl2 = st.columns(2)
+                    
+                    with col_ctrl1:
+                        status_tuo = controllo.get('tuo_video', 'N/A')
+                        if status_tuo == 'OK':
+                            st.success(f"✅ Il Tuo Video: {status_tuo}")
+                        elif status_tuo == 'ATTENZIONE':
+                            st.warning(f"⚠️ Il Tuo Video: {status_tuo}")
+                        elif status_tuo == 'CRITICO':
+                            st.error(f"❌ Il Tuo Video: {status_tuo}")
+                        st.caption(controllo.get('motivazione_tuo', 'N/A'))
+                    
+                    with col_ctrl2:
+                        status_comp = controllo.get('competitor', 'N/A')
+                        if status_comp == 'OK':
+                            st.success(f"✅ Competitor: {status_comp}")
+                        elif status_comp == 'ATTENZIONE':
+                            st.warning(f"⚠️ Competitor: {status_comp}")
+                        elif status_comp == 'CRITICO':
+                            st.error(f"❌ Competitor: {status_comp}")
+                        st.caption(controllo.get('motivazione_competitor', 'N/A'))
+                    
+                    st.markdown("---")
         
         # Tabella comparativa
         st.header("📊 Tabella Comparativa")

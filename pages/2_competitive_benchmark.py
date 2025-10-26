@@ -56,6 +56,9 @@ if video_tuo and video_competitor:
                             {{"caratteristica": "Adatto al target demografico", "tuo_video": true/false, "competitor": true/false}},
                             {{"caratteristica": "Ottimizzato per mobile/social", "tuo_video": true/false, "competitor": true/false}}
                         ],
+                        "controlli_personalizzati": [
+                            {{"controllo": "...", "tuo_video": "OK|ATTENZIONE|CRITICO", "competitor": "OK|ATTENZIONE|CRITICO", "motivazione_tuo": "...", "motivazione_competitor": "..."}}
+                        ],
                         "analisi_comparativa": {{
                             "punti_di_forza_tuo": ["Punto di forza 1", "..."],
                             "aree_di_miglioramento_tuo": ["Debolezza 1", "..."],
@@ -65,12 +68,18 @@ if video_tuo and video_competitor:
                         }}
                     }}
                     
+                    ISTRUZIONI PER L'ANALISI:
+                    1. **Analisi Generale:** Valuta aspetti culturali, DE&I e rischi generali per entrambi i video.
+                    2. **Analisi Specifica per Paese:** Se richiesta, applica le linee guida culturali fornite.
+                    3. **Controlli Personalizzati:** Se specificati, verificali esplicitamente per entrambi i video e includili nella valutazione.
+                    4. **Confronto Strategico:** Identifica vantaggi competitivi e aree di miglioramento.
+                    
                     INFO PER L'ANALISI:
                     - Mercato Target: {paese_sel}
                     - Linee Guida Culturali: {utils.carica_vincoli_culturali(paese_sel) or "Nessuna"}
                     - Controlli Personalizzati: {controlli_pers or "Nessuno"}
 
-                    Analizza entrambi i video e fornisci il report comparativo JSON.
+                    Analizza entrambi i video considerando tutti i parametri sopra e fornisci il report comparativo JSON.
                     """
                     
                     model = genai.GenerativeModel(model_name="gemini-flash-latest")
