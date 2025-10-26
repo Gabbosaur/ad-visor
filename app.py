@@ -23,7 +23,7 @@ st.markdown("""
   Mette a confronto il tuo video con quello di un competitor per fornirti un'analisi SWOT strategica e identificare i tuoi vantaggi competitivi.
 
 - **📊 Report Hub:** 
-  _(In sviluppo)_ Visualizza e gestisci le tue analisi passate.
+  _(in sviluppo)_ Visualizza e gestisci le tue analisi passate.
 """)
 
 st.sidebar.success("Seleziona un tool per iniziare.")
